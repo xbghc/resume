@@ -49,41 +49,24 @@ export interface ResumeData {
   }[]
 }
 
-const STORAGE_KEY = 'resume-data'
-
 export const useResumeStore = defineStore('resume', () => {
   const data = ref<ResumeData>({ ...templates.zh! })
 
-  function load() {
-    const cached = localStorage.getItem(STORAGE_KEY)
-    if (cached) {
-      data.value = JSON.parse(cached)
-    }
-  }
-
-  function save(newData: ResumeData) {
-    data.value = newData
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newData))
-  }
-
   function clear() {
     data.value = { ...emptyData }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(emptyData))
   }
 
   function loadTemplate(locale: string = 'zh') {
     const template = templates[locale] ?? templates.zh!
     data.value = { ...template }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(template))
   }
 
   async function importFromFile(file: File) {
     const text = await file.text()
-    const parsed = JSON.parse(text) as ResumeData
-    save(parsed)
+    data.value = JSON.parse(text) as ResumeData
   }
 
-  load()
-
-  return { data, load, save, clear, loadTemplate, importFromFile }
+  return { data, clear, loadTemplate, importFromFile }
+}, {
+  persist: true,
 })

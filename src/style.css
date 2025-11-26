@@ -1,5 +1,31 @@
 @import 'tailwindcss';
 
 body {
-  @apply m-0 bg-gray-50;
+  @apply m-0 bg-gray-200;
+}
+
+/* A4 纸张尺寸 */
+.a4-page {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 打印样式 */
+@media print {
+  body {
+    background: white;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .a4-page {
+    width: 100%;
+    min-height: auto;
+    box-shadow: none;
+    margin: 0;
+  }
 }
