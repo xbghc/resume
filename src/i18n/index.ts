@@ -42,6 +42,7 @@ const messages = {
     action: {
       import: '导入',
       export: '导出PDF',
+      exportJSON: '导出JSON',
       loadTemplate: '模板',
       clear: '清空',
       add: '添加',
@@ -90,6 +91,7 @@ const messages = {
     action: {
       import: 'Import',
       export: 'Export PDF',
+      exportJSON: 'Export JSON',
       loadTemplate: 'Template',
       clear: 'Clear',
       add: 'Add',

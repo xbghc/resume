@@ -50,6 +50,17 @@ function exportPDF() {
   window.print()
 }
 
+function exportJSON() {
+  const json = JSON.stringify(store.data, null, 2)
+  const blob = new Blob([json], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `${store.data.name || 'resume'}.json`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 function addExperience() {
   store.data.experience.push({
     company: '',
@@ -167,6 +178,12 @@ function removeCertification(index: number) {
         @click="exportPDF"
       >
         {{ t('action.export') }}
+      </button>
+      <button
+        class="px-3 py-1.5 text-sm border border-gray-300 rounded hover:bg-gray-100"
+        @click="exportJSON"
+      >
+        {{ t('action.exportJSON') }}
       </button>
       <input
         ref="fileInput"
@@ -356,11 +373,20 @@ function removeCertification(index: number) {
               class="w-full px-3 py-2 border rounded text-sm"
             />
             <input
-              :value="skill.keywords.join(', ')"
               :placeholder="t('field.keywords')"
               class="w-full px-3 py-2 border rounded text-sm"
-              @input="skill.keywords = ($event.target as HTMLInputElement).value.split(',').map(s => s.trim()).filter(Boolean)"
+              @keyup.enter="(e) => { const input = e.target as HTMLInputElement; const val = input.value.trim(); if (val) { skill.keywords.push(val); input.value = '' } }"
             />
+            <div v-if="skill.keywords.length" class="flex flex-wrap gap-1 mt-1">
+              <span
+                v-for="(keyword, kIndex) in skill.keywords"
+                :key="kIndex"
+                class="px-2 py-0.5 bg-gray-200 text-gray-700 text-xs rounded cursor-pointer hover:bg-red-100 hover:text-red-600"
+                @click="skill.keywords.splice(kIndex, 1)"
+              >
+                {{ keyword }} ×
+              </span>
+            </div>
           </div>
           <button
             class="w-full py-2 border border-dashed border-gray-300 rounded text-gray-500 hover:bg-gray-50"
