@@ -535,11 +535,23 @@ function removeCertification(index: number) {
             :key="index"
             class="p-3 bg-gray-50 rounded space-y-2"
           >
-            <div class="flex justify-between">
-              <span class="text-sm font-medium">{{ project.name || `#${index + 1}` }}</span>
-              <button class="text-red-500 text-sm" @click="removeProject(index)">
-                {{ t('action.delete') }}
-              </button>
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-medium" :class="{ 'text-gray-400': project.hidden }">
+                {{ project.name || `#${index + 1}` }}
+              </span>
+              <div class="flex items-center gap-2">
+                <button
+                  class="text-sm px-2"
+                  :class="project.hidden ? 'text-gray-400' : 'text-cyan-600'"
+                  @click="project.hidden = !project.hidden"
+                  :title="project.hidden ? t('action.show') : t('action.hide')"
+                >
+                  {{ project.hidden ? '○' : '●' }}
+                </button>
+                <button class="text-red-500 text-sm" @click="removeProject(index)">
+                  {{ t('action.delete') }}
+                </button>
+              </div>
             </div>
             <input
               v-model="project.name"
@@ -612,6 +624,7 @@ function removeCertification(index: number) {
           </button>
         </div>
       </div>
+
     </div>
   </div>
 </template>

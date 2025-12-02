@@ -48,6 +48,8 @@ const messages = {
       add: '添加',
       delete: '删除',
       upload: '上传',
+      show: '显示',
+      hide: '隐藏',
     },
   },
   en: {
@@ -97,6 +99,8 @@ const messages = {
       add: 'Add',
       delete: 'Delete',
       upload: 'Upload',
+      show: 'Show',
+      hide: 'Hide',
     },
   },
 }

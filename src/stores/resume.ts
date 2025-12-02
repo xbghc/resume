@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { templates, emptyData } from '@/data/templates'
 
@@ -41,6 +41,7 @@ export interface ResumeData {
     name: string
     role?: string
     description: string
+    hidden?: boolean
   }[]
   certifications?: {
     name: string
@@ -51,6 +52,10 @@ export interface ResumeData {
 
 export const useResumeStore = defineStore('resume', () => {
   const data = ref<ResumeData>({ ...templates.zh! })
+
+  const visibleProjects = computed(() => {
+    return data.value.projects?.filter(p => !p.hidden) ?? []
+  })
 
   function clear() {
     data.value = { ...emptyData }
@@ -66,7 +71,7 @@ export const useResumeStore = defineStore('resume', () => {
     data.value = JSON.parse(text) as ResumeData
   }
 
-  return { data, clear, loadTemplate, importFromFile }
+  return { data, visibleProjects, clear, loadTemplate, importFromFile }
 }, {
   persist: true,
 })
