@@ -55,4 +55,10 @@ body {
     box-shadow: none;
     margin: 0;
   }
+
+  /* 打印时链接不显示高亮 */
+  .markdown-content a,
+  a {
+    color: inherit;
+  }
 }
