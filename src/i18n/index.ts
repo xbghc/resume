@@ -12,6 +12,7 @@ const messages = {
       skills: '技能',
       projects: '项目经历',
       certifications: '证书',
+      campus: '校园经历',
     },
     field: {
       avatar: '头像',
@@ -38,6 +39,8 @@ const messages = {
       certName: '证书名称',
       issuer: '颁发机构',
       year: '年份',
+      campusName: '活动/组织名称',
+      campusRole: '担任角色',
     },
     action: {
       import: '导入',
@@ -65,6 +68,7 @@ const messages = {
       skills: 'Skills',
       projects: 'Projects',
       certifications: 'Certifications',
+      campus: 'Campus Activities',
     },
     field: {
       avatar: 'Avatar',
@@ -91,6 +95,8 @@ const messages = {
       certName: 'Certificate Name',
       issuer: 'Issuer',
       year: 'Year',
+      campusName: 'Activity/Organization',
+      campusRole: 'Role',
     },
     action: {
       import: 'Import',

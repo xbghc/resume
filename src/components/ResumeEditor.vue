@@ -18,6 +18,7 @@ const expandedSections = ref<Record<string, boolean>>({
   experience: false,
   education: false,
   certifications: false,
+  campus: false,
 })
 
 function toggleSection(section: string) {
@@ -130,6 +131,19 @@ function addCertification() {
 
 function removeCertification(index: number) {
   store.data.certifications?.splice(index, 1)
+}
+
+function addCampus() {
+  if (!store.data.campus) store.data.campus = []
+  store.data.campus.push({
+    name: '',
+    role: '',
+    period: '',
+  })
+}
+
+function removeCampus(index: number) {
+  store.data.campus?.splice(index, 1)
 }
 </script>
 
@@ -551,6 +565,52 @@ function removeCertification(index: number) {
           <button
             class="w-full py-2 border border-dashed border-gray-300 rounded text-gray-500 hover:bg-gray-50"
             @click="addCertification"
+          >
+            + {{ t('action.add') }}
+          </button>
+        </div>
+      </div>
+
+      <!-- 校园经历 -->
+      <div class="border rounded">
+        <button
+          class="w-full px-4 py-2 text-left font-medium bg-gray-50 hover:bg-gray-100 flex justify-between items-center"
+          @click="toggleSection('campus')"
+        >
+          {{ t('resume.campus') }}
+          <span>{{ expandedSections.campus ? '−' : '+' }}</span>
+        </button>
+        <div v-if="expandedSections.campus" class="p-4 space-y-3">
+          <div
+            v-for="(item, index) in store.data.campus"
+            :key="index"
+            class="p-3 bg-gray-50 rounded space-y-2"
+          >
+            <div class="flex justify-between">
+              <span class="text-sm font-medium">{{ item.name || `#${index + 1}` }}</span>
+              <button class="text-red-500 text-sm" @click="removeCampus(index)">
+                {{ t('action.delete') }}
+              </button>
+            </div>
+            <input
+              v-model="item.name"
+              :placeholder="t('field.campusName')"
+              class="w-full px-3 py-2 border rounded text-sm"
+            />
+            <input
+              v-model="item.role"
+              :placeholder="t('field.campusRole')"
+              class="w-full px-3 py-2 border rounded text-sm"
+            />
+            <input
+              v-model="item.period"
+              :placeholder="t('field.period')"
+              class="w-full px-3 py-2 border rounded text-sm"
+            />
+          </div>
+          <button
+            class="w-full py-2 border border-dashed border-gray-300 rounded text-gray-500 hover:bg-gray-50"
+            @click="addCampus"
           >
             + {{ t('action.add') }}
           </button>

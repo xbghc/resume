@@ -4,6 +4,7 @@ import ContactSection from './resume/ContactSection.vue'
 import ProfilesSection from './resume/ProfilesSection.vue'
 import SkillsSection from './resume/SkillsSection.vue'
 import CertificationsSection from './resume/CertificationsSection.vue'
+import CampusSection from './resume/CampusSection.vue'
 import SummarySection from './resume/SummarySection.vue'
 import ExperienceSection from './resume/ExperienceSection.vue'
 import EducationSection from './resume/EducationSection.vue'
@@ -19,6 +20,7 @@ import ProjectsSection from './resume/ProjectsSection.vue'
       <ProfilesSection />
       <SkillsSection />
       <CertificationsSection />
+      <CampusSection />
     </aside>
 
     <!-- 右侧主内容 -->

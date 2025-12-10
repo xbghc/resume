@@ -51,6 +51,11 @@ export interface ResumeData {
     issuer: string
     year: string
   }[]
+  campus?: {
+    name: string
+    role: string
+    period: string
+  }[]
 }
 
 export const useResumeStore = defineStore('resume', () => {
