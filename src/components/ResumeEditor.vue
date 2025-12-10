@@ -443,6 +443,11 @@ function removeCampus(index: number) {
               :placeholder="t('field.location')"
               class="w-full px-3 py-2 border rounded text-sm"
             />
+            <input
+              v-model="exp.url"
+              :placeholder="t('field.url')"
+              class="w-full px-3 py-2 border rounded text-sm"
+            />
             <div class="space-y-1">
               <label class="text-xs text-gray-500">{{ t('field.highlights') }}</label>
               <div v-for="(hl, hlIndex) in exp.highlights" :key="hlIndex" class="flex gap-2">
