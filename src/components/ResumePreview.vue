@@ -25,10 +25,10 @@ import ProjectsSection from './resume/ProjectsSection.vue'
 
     <!-- 右侧主内容 -->
     <main class="w-2/3 bg-white p-6">
-      <SummarySection />
       <ExperienceSection />
       <EducationSection />
       <ProjectsSection />
+      <SummarySection />
     </main>
   </div>
 </template>
