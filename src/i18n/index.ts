@@ -50,6 +50,8 @@ const messages = {
       upload: '上传',
       show: '显示',
       hide: '隐藏',
+      expand: '展开',
+      collapse: '折叠',
     },
   },
   en: {
@@ -101,6 +103,8 @@ const messages = {
       upload: 'Upload',
       show: 'Show',
       hide: 'Hide',
+      expand: 'Expand',
+      collapse: 'Collapse',
     },
   },
 }

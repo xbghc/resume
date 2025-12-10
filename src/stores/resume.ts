@@ -2,6 +2,14 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { templates, emptyData } from '@/data/templates'
 
+export interface ProjectData {
+  _uid: string
+  name: string
+  role: string
+  description: string
+  hidden: boolean
+}
+
 export interface ResumeData {
   name: string
   title: string
@@ -37,12 +45,7 @@ export interface ResumeData {
     location?: string
     period: string
   }[]
-  projects?: {
-    name: string
-    role?: string
-    description: string
-    hidden?: boolean
-  }[]
+  projects: ProjectData[]
   certifications?: {
     name: string
     issuer: string
@@ -71,7 +74,19 @@ export const useResumeStore = defineStore('resume', () => {
     data.value = JSON.parse(text) as ResumeData
   }
 
-  return { data, visibleProjects, clear, loadTemplate, importFromFile }
+  function newProject(): ProjectData {
+    const p = {
+      _uid: crypto.randomUUID(),
+      name: '',
+      role: '',
+      description: '',
+      hidden: false,
+    };
+    data.value.projects?.push(p);
+    return p;
+  }
+
+  return { data, visibleProjects, clear, loadTemplate, importFromFile, newProject }
 }, {
   persist: true,
 })

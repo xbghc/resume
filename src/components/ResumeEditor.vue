@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useResumeStore } from '@/stores/resume'
+import ProjectsSection from './ProjectsSection.vue'
 
 const { t, locale } = useI18n()
 const store = useResumeStore()
@@ -16,7 +17,6 @@ const expandedSections = ref<Record<string, boolean>>({
   skills: false,
   experience: false,
   education: false,
-  projects: false,
   certifications: false,
 })
 
@@ -106,18 +106,6 @@ function removeSkill(index: number) {
   store.data.skills.splice(index, 1)
 }
 
-function addProject() {
-  if (!store.data.projects) store.data.projects = []
-  store.data.projects.push({
-    name: '',
-    role: '',
-    description: '',
-  })
-}
-
-function removeProject(index: number) {
-  store.data.projects?.splice(index, 1)
-}
 
 function addProfile() {
   if (!store.data.profiles) store.data.profiles = []
@@ -185,13 +173,7 @@ function removeCertification(index: number) {
       >
         {{ t('action.exportJSON') }}
       </button>
-      <input
-        ref="fileInput"
-        type="file"
-        accept=".json"
-        class="hidden"
-        @change="handleFileChange"
-      />
+      <input ref="fileInput" type="file" accept=".json" class="hidden" @change="handleFileChange" />
     </div>
 
     <div class="p-4 space-y-2">
@@ -375,7 +357,16 @@ function removeCertification(index: number) {
             <input
               :placeholder="t('field.keywords')"
               class="w-full px-3 py-2 border rounded text-sm"
-              @keyup.enter="(e) => { const input = e.target as HTMLInputElement; const val = input.value.trim(); if (val) { skill.keywords.push(val); input.value = '' } }"
+              @keyup.enter="
+                (e) => {
+                  const input = e.target as HTMLInputElement
+                  const val = input.value.trim()
+                  if (val) {
+                    skill.keywords.push(val)
+                    input.value = ''
+                  }
+                }
+              "
             />
             <div v-if="skill.keywords.length" class="flex flex-wrap gap-1 mt-1">
               <span
@@ -452,10 +443,7 @@ function removeCertification(index: number) {
                   ×
                 </button>
               </div>
-              <button
-                class="text-sm text-cyan-600 hover:underline"
-                @click="addHighlight(expIndex)"
-              >
+              <button class="text-sm text-cyan-600 hover:underline" @click="addHighlight(expIndex)">
                 + {{ t('action.add') }}
               </button>
             </div>
@@ -521,63 +509,7 @@ function removeCertification(index: number) {
       </div>
 
       <!-- 项目经历 -->
-      <div class="border rounded">
-        <button
-          class="w-full px-4 py-2 text-left font-medium bg-gray-50 hover:bg-gray-100 flex justify-between items-center"
-          @click="toggleSection('projects')"
-        >
-          {{ t('resume.projects') }}
-          <span>{{ expandedSections.projects ? '−' : '+' }}</span>
-        </button>
-        <div v-if="expandedSections.projects" class="p-4 space-y-3">
-          <div
-            v-for="(project, index) in store.data.projects"
-            :key="index"
-            class="p-3 bg-gray-50 rounded space-y-2"
-          >
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-medium" :class="{ 'text-gray-400': project.hidden }">
-                {{ project.name || `#${index + 1}` }}
-              </span>
-              <div class="flex items-center gap-2">
-                <button
-                  class="text-sm px-2"
-                  :class="project.hidden ? 'text-gray-400' : 'text-cyan-600'"
-                  @click="project.hidden = !project.hidden"
-                  :title="project.hidden ? t('action.show') : t('action.hide')"
-                >
-                  {{ project.hidden ? '○' : '●' }}
-                </button>
-                <button class="text-red-500 text-sm" @click="removeProject(index)">
-                  {{ t('action.delete') }}
-                </button>
-              </div>
-            </div>
-            <input
-              v-model="project.name"
-              :placeholder="t('field.projectName')"
-              class="w-full px-3 py-2 border rounded text-sm"
-            />
-            <input
-              v-model="project.role"
-              :placeholder="t('field.role')"
-              class="w-full px-3 py-2 border rounded text-sm"
-            />
-            <textarea
-              v-model="project.description"
-              :placeholder="t('field.description')"
-              rows="2"
-              class="w-full px-3 py-2 border rounded text-sm"
-            ></textarea>
-          </div>
-          <button
-            class="w-full py-2 border border-dashed border-gray-300 rounded text-gray-500 hover:bg-gray-50"
-            @click="addProject"
-          >
-            + {{ t('action.add') }}
-          </button>
-        </div>
-      </div>
+      <ProjectsSection />
 
       <!-- 证书 -->
       <div class="border rounded">
@@ -624,7 +556,6 @@ function removeCertification(index: number) {
           </button>
         </div>
       </div>
-
     </div>
   </div>
 </template>
