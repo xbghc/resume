@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Resume from '@/components/Resume.vue'
+import Resume from '@/components/ResumePreview.vue'
 import ResumeEditor from '@/components/ResumeEditor.vue'
 </script>
 
