@@ -21,6 +21,7 @@ import ProjectsSection from './resume/ProjectsSection.vue'
       <SkillsSection />
       <CertificationsSection />
       <CampusSection />
+      <SummarySection />
     </aside>
 
     <!-- 右侧主内容 -->
@@ -28,7 +29,6 @@ import ProjectsSection from './resume/ProjectsSection.vue'
       <ExperienceSection />
       <EducationSection />
       <ProjectsSection />
-      <SummarySection />
     </main>
   </div>
 </template>

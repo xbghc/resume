@@ -19,6 +19,9 @@ export interface ResumeData {
     phone: string
     location: string
     website?: string
+    birthDate?: string
+    birthDateDisplay?: 'age' | 'date'
+    address?: string
   }
   profiles?: {
     network: string

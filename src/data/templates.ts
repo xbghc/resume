@@ -9,6 +9,9 @@ export const templates: Record<string, ResumeData> = {
       phone: '138-0000-0000',
       location: '北京市朝阳区',
       website: 'https://zhangsan.me/',
+      birthDate: '1997-06-15',
+      birthDateDisplay: 'age',
+      address: '北京市朝阳区望京街道',
     },
     profiles: [
       { network: 'LinkedIn', username: 'zhangsan', url: 'https://linkedin.com/in/zhangsan' },
@@ -92,6 +95,9 @@ export const templates: Record<string, ResumeData> = {
       phone: '(555) 123-4567',
       location: 'Pleasantville, CA 94588',
       website: 'https://johndoe.me/',
+      birthDate: '1997-06-15',
+      birthDateDisplay: 'age',
+      address: '123 Main Street, Pleasantville, CA',
     },
     profiles: [
       { network: 'LinkedIn', username: 'johndoe', url: 'https://linkedin.com/in/johndoe' },

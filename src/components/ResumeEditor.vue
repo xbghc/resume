@@ -260,6 +260,41 @@ function removeCampus(index: number) {
         </button>
         <div v-if="expandedSections.contact" class="p-4 space-y-3">
           <div>
+            <label class="block text-sm text-gray-600 mb-1">{{ t('field.birthDate') }}</label>
+            <input
+              v-model="store.data.contact.birthDate"
+              type="date"
+              class="w-full px-3 py-2 border rounded"
+              @change="store.data.contact.birthDateDisplay ??= 'age'"
+            />
+            <div v-if="store.data.contact.birthDate" class="mt-2 flex gap-4">
+              <label class="flex items-center gap-1 text-sm text-gray-600 cursor-pointer">
+                <input
+                  type="radio"
+                  name="birthDateDisplay"
+                  v-model="store.data.contact.birthDateDisplay"
+                  value="age"
+                  class="accent-cyan-600"
+                />
+                {{ t('field.showAge') }}
+              </label>
+              <label class="flex items-center gap-1 text-sm text-gray-600 cursor-pointer">
+                <input
+                  type="radio"
+                  name="birthDateDisplay"
+                  v-model="store.data.contact.birthDateDisplay"
+                  value="date"
+                  class="accent-cyan-600"
+                />
+                {{ t('field.showBirthDate') }}
+              </label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm text-gray-600 mb-1">{{ t('field.address') }}</label>
+            <input v-model="store.data.contact.address" class="w-full px-3 py-2 border rounded" />
+          </div>
+          <div>
             <label class="block text-sm text-gray-600 mb-1">{{ t('field.email') }}</label>
             <input v-model="store.data.contact.email" class="w-full px-3 py-2 border rounded" />
           </div>
